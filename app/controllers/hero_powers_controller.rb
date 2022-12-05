@@ -1,2 +1,13 @@
 class HeroPowersController < ApplicationController
-end
+
+    def create
+      heropower = HeroPower.create!(hero_power_params)
+      render json: heropower.hero, serializer: HeroWithPowersSerializer
+    end
+  
+    private
+  
+    def hero_power_params
+      params.permit(:strength, :power_id, :hero_id)
+    end
+  end
